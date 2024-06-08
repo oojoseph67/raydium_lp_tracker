@@ -1,12 +1,6 @@
 import { Connection, PublicKey } from "@solana/web3.js";
-import {
-  RAYDIUM_PUBLIC_KEY,
-  HTTP_URL,
-  WSS_URL,
-  INSTRUCTION_NAME,
-} from "./configs";
 
-const RAYDIUM = new PublicKey(RAYDIUM_PUBLIC_KEY);
+
 
 const connection = new Connection(HTTP_URL, {
   wsEndpoint: WSS_URL,
@@ -51,17 +45,17 @@ async function fetchRaydiumMints(txId: string, connection: Connection) {
       const accounts = instruction.accounts as PublicKey[];
 
       const pairAddress = 4;
-      const solAddress = 8;
-      const mintAddress = 9;
+      const mintAddress = 8;
+      const solAddress = 9;
 
-      if (accounts.length > mintAddress && accounts.length > solAddress) {
-        const mint = accounts[mintAddress];
+      if (accounts.length > solAddress && accounts.length > mintAddress) {
         const sol = accounts[solAddress];
+        const mint = accounts[mintAddress];
         const pair = accounts[pairAddress];
 
         const displayData = [
-          { Token: "A", "Mint Address": mint.toString() },
-          { Token: "B", "Sol Address": sol.toString() },
+          { Token: "A", "Sol Address": sol.toString() },
+          { Token: "B", "Mint Address": mint.toString() },
           { Token: "C", "Pair Address": pair.toString() },
         ];
 
